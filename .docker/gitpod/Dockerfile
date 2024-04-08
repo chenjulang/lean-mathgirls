@@ -25,6 +25,11 @@ RUN { echo && echo "PS1='\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[0
 # # install whichever toolchain mathlib is currently using
 # RUN . ~/.profile && elan toolchain install $(curl https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain)
 
+# 安装wget
+RUN sudo apt update
+RUN sudo apt install wget
+RUN sudo wget --version
+
 # 一键安装
 RUN wget -q https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/install_debian.sh && bash install_debian.sh ; rm -f install_debian.sh && source ~/.profile
 
