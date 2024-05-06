@@ -35,6 +35,8 @@ RUN wget -q https://raw.githubusercontent.com/leanprover-community/mathlib-tools
 
 ENV PATH="/home/gitpod/.local/bin:/home/gitpod/.elan/bin:${PATH}"
 
+RUN source ~/.profile
+
 # fix the infoview when the container is used on gitpod:
 ENV VSCODE_API_VERSION="1.50.0"
 
