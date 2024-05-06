@@ -27,10 +27,10 @@ RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -
 # RUN . ~/.profile && elan toolchain install $(curl https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain)
 
 # 安装一个名为 leanproject 的小工具，它将根据当前项目的需要来处理 mathlib 的更新。我们使用 pipx 来执行安装。
-RUN python3 -m pip install --user pipx
-RUN python3 -m pipx ensurepath
-RUN source ~/.profile
-RUN pipx install mathlibtools
+# RUN python3 -m pip install --user pipx
+# RUN python3 -m pipx ensurepath
+# RUN source ~/.profile
+# RUN pipx install mathlibtools
 
 # 安装wget
 RUN sudo apt update
