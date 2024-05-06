@@ -6,7 +6,7 @@ FROM ubuntu:jammy
 
 USER root
 
-RUN apt-get update && apt-get install sudo git curl git bash-completion python3 python3-pip -y && apt-get clean
+RUN apt-get update && apt-get install sudo git curl git bash-completion python3 python3-pip python3-venv -y && apt-get clean
 
 RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod \
     # passwordless sudo for users in the 'sudo' group
@@ -21,17 +21,26 @@ RUN { echo && echo "PS1='\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[0
 
 # # install elan
 # RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
 
 # # install whichever toolchain mathlib is currently using
 # RUN . ~/.profile && elan toolchain install $(curl https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain)
+
+# 安装一个名为 leanproject 的小工具，它将根据当前项目的需要来处理 mathlib 的更新。我们使用 pipx 来执行安装。
+RUN python3 -m pip install --user pipx
+RUN python3 -m pipx ensurepath
+RUN source ~/.profile
+RUN pipx install mathlibtools
 
 # 安装wget
 RUN sudo apt update
 RUN sudo apt install wget
 RUN sudo wget --version
 
+
+
 # 一键安装
-RUN wget -q https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/install_debian.sh && bash install_debian.sh ; rm -f install_debian.sh && source ~/.profile
+# RUN wget -q https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/install_debian.sh && bash install_debian.sh ; rm -f install_debian.sh && source ~/.profile
 
 ENV PATH="/home/gitpod/.local/bin:/home/gitpod/.elan/bin:${PATH}"
 
