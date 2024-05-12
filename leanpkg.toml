@@ -2,7 +2,6 @@
 name = "lean-mathgirls"
 version = "0.1"
 lean_version = "leanprover-community/lean:3.24.0"
-path = "src"
 
 [dependencies]
-mathlib = {git = "https://github.com/leanprover-community/mathlib", rev = "648ff2168c7e00bf53bf99485f9d645ed117444c"}
+mathlib = {git = "https://github.com/leanprover-community/mathlib", rev = "5f98a9617e4b634cb60c15698087f92557e47fa6"}
